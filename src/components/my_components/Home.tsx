@@ -7,6 +7,7 @@ import {
   SiNextdotjs,
   SiPython,
 } from "react-icons/si"; // Tech Icons
+import Avatar from "../../../public/avatar.png";
 
 interface HomeProps {
   dark: boolean; // Accept the dark prop
@@ -87,7 +88,7 @@ function Home({ dark }: HomeProps) {
         {/* Avatar with contrasting background */}
         <div className="relative rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-3 md:p-4 lg:p-6 hover:scale-105 transition-transform duration-300 shadow-2xl">
           <img
-            src="public/avatar.png"
+            src={Avatar}
             alt="Avatar"
             className="rounded-full h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80 object-cover bg-gray-200 dark:bg-gray-800 transition-colors duration-500"
           />
