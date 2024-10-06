@@ -1,3 +1,8 @@
+import DrawAPP from "../../../public/drawapp.jpeg";
+import Card from "../../../public/card.jpeg";
+import Blinkit from "../../../public/blinkit.png";
+import PizzaSales from "../../../public/pizzasales.png";
+
 interface ProjectsProps {
   dark: boolean; // Accept the dark prop
 }
@@ -21,7 +26,7 @@ const Projects = ({ dark }: ProjectsProps) => {
           }`}
         >
           <img
-            src="./src/assets/drawapp.jpeg" // Replace with your image path
+            src={DrawAPP} // Replace with your image path
             alt="RealTime Collaborative Drawing App"
             className="w-full h-48 object-cover"
           />
@@ -68,7 +73,7 @@ const Projects = ({ dark }: ProjectsProps) => {
           }`}
         >
           <img
-            src="./src/assets/card.jpeg" // Replace with your image path
+            src={Card} // Replace with your image path
             alt="Flash Card Project"
             className="w-full h-48 object-cover"
           />
@@ -113,7 +118,7 @@ const Projects = ({ dark }: ProjectsProps) => {
           }`}
         >
           <img
-            src="./src/assets/blinkit.png" // Replace with your image path
+            src={Blinkit} // Replace with your image path
             alt="BlinkIt Backend Project"
             className="w-full h-48 object-cover"
           />
@@ -146,7 +151,7 @@ const Projects = ({ dark }: ProjectsProps) => {
           }`}
         >
           <img
-            src="./src/assets/pizzasales.png" // Replace with your image path
+            src={PizzaSales} // Replace with your image path
             alt="Pizza Sales Report"
             className="w-full h-48 object-cover"
           />
