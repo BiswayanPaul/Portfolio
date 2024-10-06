@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/my_components/Navbar";
 import Home from "./components/my_components/Home";
 import About from "./components/my_components/About";
@@ -10,8 +10,16 @@ import Skills from "./components/my_components/Skills"; // Ensure this is the co
 function App() {
   const [dark, setDark] = useState<boolean>(false);
 
+  useEffect(() => {
+    // Check if the user prefers dark mode
+    const prefersDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setDark(prefersDarkMode);
+  }, []); // Empty dependency array to run this only once on mount
+
   function toggleMode() {
-    setDark(!dark);
+    setDark((prevDark) => !prevDark);
   }
 
   return (
