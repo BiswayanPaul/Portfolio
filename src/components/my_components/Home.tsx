@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"; // Social Media Icons
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa"; // Social Media Icons
 import {
   SiHtml5,
   SiCss3,
@@ -17,9 +17,8 @@ function Home({ dark }: HomeProps) {
   return (
     <section
       id="home"
-      className={`min-h-screen flex flex-col md:flex-row items-center justify-between p-16 transition-colors duration-300 ${
-        dark ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-800"
-      }`}
+      className={`min-h-screen flex flex-col md:flex-row items-center justify-between p-16 transition-colors duration-300 ${dark ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-800"
+        }`}
     >
       {/* Left Section: Introduction */}
       <div className="md:w-1/2 p-8 text-center md:text-left">
@@ -40,9 +39,8 @@ function Home({ dark }: HomeProps) {
           >
             <FaGithub
               size={40}
-              className={`hover:text-blue-500 transition-colors duration-300 ${
-                dark ? "text-gray-200" : "text-gray-800"
-              }`}
+              className={`hover:text-blue-500 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
+                }`}
             />
           </a>
           <a
@@ -53,9 +51,8 @@ function Home({ dark }: HomeProps) {
           >
             <FaLinkedin
               size={40}
-              className={`hover:text-blue-700 transition-colors duration-300 ${
-                dark ? "text-gray-200" : "text-gray-800"
-              }`}
+              className={`hover:text-blue-700 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
+                }`}
             />
           </a>
           <a
@@ -66,9 +63,20 @@ function Home({ dark }: HomeProps) {
           >
             <FaTwitter
               size={40}
-              className={`hover:text-blue-400 transition-colors duration-300 ${
-                dark ? "text-gray-200" : "text-gray-800"
-              }`}
+              className={`hover:text-blue-400 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
+                }`}
+            />
+          </a>
+          <a
+            href="mailto:biswayanpaulju@example.com" // Replace with your actual email
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:scale-125 transition-transform"
+          >
+            <FaEnvelope
+              size={40}
+              className={`hover:text-red-500 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
+                }`}
             />
           </a>
         </div>
@@ -99,49 +107,43 @@ function Home({ dark }: HomeProps) {
           <div className="flex items-center mb-4">
             <SiHtml5
               size={50}
-              className={`md:text-5xl lg:text-6xl text-orange-600 hover:text-orange-500 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${
-                dark ? "text-orange-400" : "text-orange-600"
-              }`}
+              className={`md:text-5xl lg:text-6xl text-orange-600 hover:text-orange-500 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-orange-400" : "text-orange-600"
+                }`}
             />
           </div>
           <div className="flex items-center mb-4">
             <SiCss3
               size={50}
-              className={`md:text-5xl lg:text-6xl text-blue-600 hover:text-blue-500 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${
-                dark ? "text-blue-400" : "text-blue-600"
-              }`}
+              className={`md:text-5xl lg:text-6xl text-blue-600 hover:text-blue-500 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-blue-400" : "text-blue-600"
+                }`}
             />
           </div>
           <div className="flex items-center mb-4">
             <SiJavascript
               size={50}
-              className={`md:text-5xl lg:text-6xl text-yellow-400 hover:text-yellow-300 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${
-                dark ? "text-yellow-300" : "text-yellow-400"
-              }`}
+              className={`md:text-5xl lg:text-6xl text-yellow-400 hover:text-yellow-300 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-yellow-300" : "text-yellow-400"
+                }`}
             />
           </div>
           <div className="flex items-center mb-4">
             <SiReact
               size={50}
-              className={`md:text-5xl lg:text-6xl text-blue-400 hover:text-blue-300 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${
-                dark ? "text-blue-300" : "text-blue-400"
-              }`}
+              className={`md:text-5xl lg:text-6xl text-blue-400 hover:text-blue-300 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-blue-300" : "text-blue-400"
+                }`}
             />
           </div>
           <div className="flex items-center mb-4">
             <SiNextdotjs
               size={50}
-              className={`md:text-5xl lg:text-6xl text-black hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-400 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${
-                dark ? "text-gray-200" : "text-black"
-              }`}
+              className={`md:text-5xl lg:text-6xl text-black hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-400 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-gray-200" : "text-black"
+                }`}
             />
           </div>
           <div className="flex items-center mb-4">
             <SiPython
               size={50}
-              className={`md:text-5xl lg:text-6xl hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${
-                dark ? "text-yellow-500" : "text-blue-500"
-              }`}
+              className={`md:text-5xl lg:text-6xl hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-yellow-500" : "text-blue-500"
+                }`}
             />
           </div>
         </div>
