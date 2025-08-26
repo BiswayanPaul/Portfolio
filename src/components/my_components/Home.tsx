@@ -82,7 +82,7 @@ function Home({ dark }: HomeProps) {
         </div>
         {/* Download CV Button */}
         <a
-          href="https://drive.google.com/file/d/1YRT4n4Mz66SX-B1c-ggclfAkJchLsCAs/view?usp=sharing"
+          href="https://drive.google.com/file/d/11oSJwDhVjHJXdk8IVGIqL_x26g5Scjsv/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-blue-600 text-white py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg hover:bg-blue-500 transition-colors duration-300 text-lg md:text-xl lg:text-2xl"
