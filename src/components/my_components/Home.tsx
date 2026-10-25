@@ -76,7 +76,7 @@ function Home() {
         <div className="order-first flex justify-center md:order-last">
           <div className="rounded-full bg-gradient-to-tr from-indigo-500 via-sky-400 to-fuchsia-500 p-1.5 shadow-2xl shadow-indigo-500/20">
             <img
-              src="/avatar.png"
+              src="/profilePic.jpg"
               alt={profile.name}
               className="h-44 w-44 rounded-full bg-slate-100 object-cover sm:h-56 sm:w-56 lg:h-72 lg:w-72 dark:bg-slate-900"
             />
