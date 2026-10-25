@@ -1,75 +1,53 @@
 // src/components/About.tsx
+import { FiBookOpen, FiBriefcase, FiCode, FiMapPin } from "react-icons/fi";
+import Section from "./Section";
+import { profile } from "@/Data/Profile";
 
-interface AboutProps {
-  dark: boolean; // Accept the dark prop
-}
+const facts = [
+  { icon: FiBriefcase, label: "Currently", value: `${profile.role}, ${profile.company}` },
+  { icon: FiMapPin, label: "Based in", value: profile.location },
+  { icon: FiBookOpen, label: "Education", value: "B.E., Jadavpur University (2025)" },
+  { icon: FiCode, label: "Focus", value: "Full-stack web, real-time systems" },
+];
 
-const About = ({ dark }: AboutProps) => {
+const About = () => {
   return (
-    <section
-      id="about"
-      className={`min-h-screen flex flex-col items-center justify-center p-8 transition-colors duration-500 ${
-        dark ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-900" // Light mode: dark text, dark mode: light text
-      }`}
-    >
-      <h2 className="text-6xl font-bold mb-6 text-center transition-colors duration-500">
-        About Me
-      </h2>
-      <p
-        className={`text-2xl max-w-3xl text-center px-4 mb-4 leading-relaxed transition-colors duration-500 ${
-          dark ? "text-gray-200" : "text-gray-900" // Light text in dark mode, dark text in light mode
-        }`}
-      >
-        I am a passionate software developer who thrives on the challenge of
-        creating innovative web applications. My journey in technology has
-        equipped me with a diverse skill set, allowing me to tackle complex
-        problems with creativity and precision.
-      </p>
-      <p
-        className={`mt-4 text-2xl max-w-3xl text-center px-4 mb-8 leading-relaxed transition-colors duration-500 ${
-          dark ? "text-gray-200" : "text-gray-900" // Light text in dark mode, dark text in light mode
-        }`}
-      >
-        I am dedicated to building impactful software solutions that not only
-        meet user needs but also enhance their lives. With experience in modern
-        technologies such as React and Next.js, I am excited to contribute to
-        technological advancements and make a positive difference through my
-        work.
-      </p>
-      <div className="flex justify-center space-x-8 mt-6">
-        {/* Optional: You can uncomment the social links if you want to include them in the future. */}
-        {/* <a
-          href="https://github.com/your-github"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`hover:scale-125 transition-transform ${
-            dark ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          <FaGithub size={40} />
-        </a>
-        <a
-          href="https://linkedin.com/in/your-linkedin"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`hover:scale-125 transition-transform ${
-            dark ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          <FaLinkedin size={40} />
-        </a>
-        <a
-          href="https://twitter.com/your-twitter"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`hover:scale-125 transition-transform ${
-            dark ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          <FaTwitter size={40} />
-        </a> */}
+    <Section id="about" eyebrow="About" title="A little about me">
+      <div className="grid gap-10 md:grid-cols-[1.5fr_1fr]">
+        <div className="space-y-5 text-lg leading-relaxed">
+          <p>
+            I'm a full-stack engineer at Tata Consultancy Services (TCS
+            Digital) in Kolkata. There I own the frontend of a 24x7 monitoring
+            system, built the access-control layer for a production
+            predictive-model service, and am building a point-of-sale
+            application end-to-end.
+          </p>
+          <p>
+            Outside work, I independently design, build and deploy full-stack
+            products, from schema design and server-side data layers with
+            PostgreSQL and Prisma to polished Next.js frontends. I graduated in
+            Chemical Engineering from Jadavpur University, and I enjoy turning
+            real-world problems into software people actually use.
+          </p>
+        </div>
+
+        <ul className="card divide-y divide-slate-200 p-2 dark:divide-slate-800">
+          {facts.map(({ icon: Icon, label, value }) => (
+            <li key={label} className="flex items-center gap-4 p-4">
+              <span className="rounded-lg bg-indigo-50 p-2.5 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                <Icon size={18} />
+              </span>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  {label}
+                </p>
+                <p className="font-medium text-slate-900 dark:text-white">{value}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </Section>
   );
 };
 

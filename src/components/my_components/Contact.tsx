@@ -1,154 +1,145 @@
 // src/components/Contact.tsx
-import { useState } from "react"; // Import useState for managing form state
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"; // Social Media Icons
-import emailjs from "emailjs-com"; // Import EmailJS for sending emails
+import { useState } from "react";
+import { FiMail, FiMapPin, FiSend } from "react-icons/fi";
+import emailjs from "emailjs-com";
+import Section from "./Section";
+import { profile, socialLinks } from "@/Data/Profile";
 
-interface ContactProps {
-  dark: boolean; // Accept the dark prop
-}
+type Status = "idle" | "sending" | "success" | "error";
 
-const Contact = ({ dark }: ContactProps) => {
-  const [name, setName] = useState(""); // State for name
-  const [email, setEmail] = useState(""); // State for email
-  const [message, setMessage] = useState(""); // State for message
-  const [status, setStatus] = useState(""); // State for form submission status
+const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
 
-  // Function to handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault();
+    setStatus("sending");
 
-    const templateParams = {
-      name,
-      email,
-      message,
-    };
-
-    // Sending email using EmailJS
     emailjs
       .send(
-        "service_smw8q4s", // Replace with your service ID
-        "template_ou197aq", // Replace with your template ID
-        templateParams,
-        "r8j80mz2x3TILzu0N" // Replace with your user ID
+        "service_smw8q4s", // EmailJS service ID
+        "template_ou197aq", // EmailJS template ID
+        { name, email, message },
+        "r8j80mz2x3TILzu0N" // EmailJS public key
       )
       .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          setStatus("Message sent successfully!");
+        () => {
+          setStatus("success");
           setName("");
           setEmail("");
           setMessage("");
         },
         (err) => {
           console.error("FAILED...", err);
-          setStatus("Failed to send message. Please try again.");
+          setStatus("error");
         }
       );
   };
 
   return (
-    <section
-      id="contact"
-      className={`min-h-screen flex flex-col items-center justify-center py-16 transition-colors duration-500 ${
-        dark ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-800"
-      }`}
-    >
-      <h2 className="text-5xl font-bold mb-6 transition-colors duration-500">
-        Contact Me
-      </h2>
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
-        I’d love to hear from you! Reach out via email or social media.
-      </p>
-      <form onSubmit={handleSubmit} className="mb-8">
-        <div className="flex flex-col mb-4">
-          <label htmlFor="name" className="mb-2">
-            Name:
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={`p-2 rounded border ${
-              dark ? "bg-gray-700 text-gray-100" : "bg-gray-200 text-gray-900"
-            }`}
-            required
-          />
+    <Section id="contact" eyebrow="Contact" title="Let's work together">
+      <div className="grid gap-10 md:grid-cols-[1fr_1.2fr]">
+        <div>
+          <p className="text-lg leading-relaxed">
+            Have a role, project or idea in mind? I'd love to hear from you.
+            Drop a message here or reach out directly.
+          </p>
+          <div className="mt-8 space-y-4">
+            <a
+              href={`mailto:${profile.email}`}
+              className="flex items-center gap-3 font-medium text-slate-900 transition hover:text-indigo-600 dark:text-white dark:hover:text-indigo-400"
+            >
+              <span className="rounded-lg bg-indigo-50 p-2.5 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                <FiMail size={18} />
+              </span>
+              <span className="break-all">{profile.email}</span>
+            </a>
+            <p className="flex items-center gap-3 font-medium text-slate-900 dark:text-white">
+              <span className="rounded-lg bg-indigo-50 p-2.5 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                <FiMapPin size={18} />
+              </span>
+              {profile.location}
+            </p>
+          </div>
+          <div className="mt-8 flex gap-2">
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="icon-link"
+              >
+                <Icon size={22} />
+              </a>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="email" className="mb-2">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={`p-2 rounded border ${
-              dark ? "bg-gray-700 text-gray-100" : "bg-gray-200 text-gray-900"
-            }`}
-            required
-          />
-        </div>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="message" className="mb-2">
-            Message:
-          </label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className={`p-2 rounded border ${
-              dark ? "bg-gray-700 text-gray-100" : "bg-gray-200 text-gray-900"
-            }`}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className={`p-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300`}
-        >
-          Submit
-        </button>
-      </form>
-      {status && <p className="text-lg">{status}</p>}
-      <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-        Email: biswayanpaulju@gmail.com
-      </p>
-      <div className="flex space-x-4">
-        {/* Social Media Links */}
-        <a
-          href="https://github.com/BiswayanPaul"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-gray-800 dark:text-gray-200 hover:text-blue-500 transition-colors duration-300 ${
-            dark ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          <FaGithub size={30} />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/biswayan-paul-8852411ba/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-gray-800 dark:text-gray-200 hover:text-blue-700 transition-colors duration-300 ${
-            dark ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          <FaLinkedin size={30} />
-        </a>
-        <a
-          href="https://x.com/paul_biswayan"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-gray-800 dark:text-gray-200 hover:text-blue-400 transition-colors duration-300 ${
-            dark ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          <FaTwitter size={30} />
-        </a>
+
+        <form onSubmit={handleSubmit} className="card space-y-5 p-6 sm:p-8">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                className="input"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="input"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="message" className="mb-1.5 block text-sm font-medium">
+              Message
+            </label>
+            <textarea
+              id="message"
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Tell me a bit about what you have in mind…"
+              className="input resize-y"
+              required
+            />
+          </div>
+          <button type="submit" disabled={status === "sending"} className="btn-primary w-full sm:w-auto">
+            <FiSend /> {status === "sending" ? "Sending…" : "Send message"}
+          </button>
+          {status === "success" && (
+            <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+              Message sent successfully! I'll get back to you soon.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-sm font-medium text-red-600 dark:text-red-400">
+              Failed to send message. Please try again or email me directly.
+            </p>
+          )}
+        </form>
       </div>
-    </section>
+    </Section>
   );
 };
 

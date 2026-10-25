@@ -1,142 +1,56 @@
-import { Doughnut } from "react-chartjs-2";
-import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import type { IconType } from "react-icons";
+import { FiCode, FiDatabase, FiLayout, FiServer, FiTool } from "react-icons/fi";
+import Section from "./Section";
 
-Chart.register(ArcElement, Tooltip, Legend);
-
-interface Skill {
-  name: string;
-  score: number; // Score should be a value between 0 and 100
+interface SkillGroup {
+  category: string;
+  icon: IconType;
+  items: string[];
 }
 
-const skills: Skill[] = [
-  { name: "HTML", score: 90 },
-  { name: "CSS", score: 85 },
-  { name: "JavaScript", score: 80 },
-  { name: "React", score: 75 },
-  { name: "Next.js", score: 70 },
-  { name: "Python", score: 60 },
-  { name: "WebSocket", score: 75 }, // New Skill
-  { name: "MongoDB", score: 70 }, // New Skill
-  { name: "SQL", score: 80 }, // New Skill
-  { name: "PowerBI", score: 65 }, // New Skill
-  { name: "Excel", score: 90 }, // New Skill
+const skillGroups: SkillGroup[] = [
+  { category: "Languages", icon: FiCode, items: ["Python", "JavaScript", "TypeScript", "C/C++"] },
+  { category: "Frontend", icon: FiLayout, items: ["React", "Next.js", "Redux", "Tailwind CSS"] },
+  { category: "Backend", icon: FiServer, items: ["Node.js", "Express.js", "FastAPI", "REST APIs"] },
+  {
+    category: "Databases",
+    icon: FiDatabase,
+    items: ["PostgreSQL", "MySQL", "MongoDB", "Prisma", "Redis"],
+  },
+  { category: "Tools", icon: FiTool, items: ["Docker", "Kubernetes", "Git", "GitHub"] },
 ];
 
-const colors = [
-  {
-    skill: "HTML",
-    color: "rgba(255, 99, 132, 1)",
-    remaining: "rgba(255, 99, 132, 0.2)",
-  },
-  {
-    skill: "CSS",
-    color: "rgba(54, 162, 235, 1)",
-    remaining: "rgba(54, 162, 235, 0.2)",
-  },
-  {
-    skill: "JavaScript",
-    color: "rgba(255, 206, 86, 1)",
-    remaining: "rgba(255, 206, 86, 0.2)",
-  },
-  {
-    skill: "React",
-    color: "rgba(75, 192, 192, 1)",
-    remaining: "rgba(75, 192, 192, 0.2)",
-  },
-  {
-    skill: "Next.js",
-    color: "rgba(153, 102, 255, 1)",
-    remaining: "rgba(153, 102, 255, 0.2)",
-  },
-  {
-    skill: "Python",
-    color: "rgba(255, 159, 64, 1)",
-    remaining: "rgba(255, 159, 64, 0.2)",
-  },
-  {
-    skill: "WebSocket",
-    color: "rgba(255, 99, 132, 1)",
-    remaining: "rgba(255, 99, 132, 0.2)",
-  },
-  {
-    skill: "MongoDB",
-    color: "rgba(54, 162, 235, 1)",
-    remaining: "rgba(54, 162, 235, 0.2)",
-  },
-  {
-    skill: "SQL",
-    color: "rgba(255, 206, 86, 1)",
-    remaining: "rgba(255, 206, 86, 0.2)",
-  },
-  {
-    skill: "PowerBI",
-    color: "rgba(75, 192, 192, 1)",
-    remaining: "rgba(75, 192, 192, 0.2)",
-  },
-  {
-    skill: "Excel",
-    color: "rgba(153, 102, 255, 1)",
-    remaining: "rgba(153, 102, 255, 0.2)",
-  },
-];
-
-function Skills({ dark }: { dark: boolean }) {
+function Skills() {
   return (
-    <section
+    <Section
       id="skills"
-      className={`p-[10%] transition-colors duration-500 ${
-        dark ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-800"
-      }`}
+      eyebrow="Skills"
+      title="What I work with"
+      className="bg-white dark:bg-slate-900/40"
     >
-      <h2 className="text-4xl font-bold text-center mb-12">Skills</h2>
-      <div className="flex flex-wrap justify-center gap-12">
-        {" "}
-        {/* Increased gap to gap-12 */}
-        {skills.map((skill, index) => {
-          const data = {
-            labels: [skill.name],
-            datasets: [
-              {
-                label: skill.name,
-                data: [skill.score, 100 - skill.score],
-                backgroundColor: [colors[index].color, colors[index].remaining],
-                borderColor: dark
-                  ? "rgba(255, 255, 255, 1)"
-                  : "rgba(0, 0, 0, 1)",
-                borderWidth: 1,
-              },
-            ],
-          };
-
-          const options = {
-            cutout: "70%", // Makes the doughnut appear like a ring
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                callbacks: {
-                  label: (tooltipItem: any) => {
-                    return `${tooltipItem.label}: ${tooltipItem.raw}%`;
-                  },
-                },
-              },
-            },
-          };
-
-          return (
-            <div
-              key={skill.name}
-              className="w-32 h-32 flex flex-col items-center space-y-4" // Increased vertical gap between chart and label to space-y-4
-            >
-              <Doughnut data={data} options={options} />
-              <span className="mt-2 text-lg font-semibold">{skill.name}</span>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {skillGroups.map(({ category, icon: Icon, items }) => (
+          <div key={category} className="card p-6">
+            <div className="flex items-center gap-3">
+              <span className="rounded-lg bg-indigo-50 p-2.5 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                <Icon size={18} />
+              </span>
+              <h3 className="text-lg font-semibold">{category}</h3>
             </div>
-          );
-        })}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {items.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-md border border-slate-200 px-2.5 py-1 text-sm font-medium text-slate-700 dark:border-slate-700 dark:text-slate-300"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
 

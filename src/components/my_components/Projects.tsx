@@ -1,69 +1,62 @@
+import { FaGithub } from 'react-icons/fa6'
+import { FiExternalLink } from 'react-icons/fi'
+import Section from './Section'
 import { projectList } from '@/Data/Projects'
-import type { Project } from '@/Data/Projects'
 
-interface ProjectsProps {
-  dark: boolean
-}
-
-const Projects = ({ dark }: ProjectsProps) => {
+const Projects = () => {
   return (
-    <section
-      id="projects"
-      className={`min-h-screen flex flex-col items-center justify-center p-60 transition-colors duration-500 ${dark ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-800'
-        }`}
-    >
-      <h2 className="text-5xl font-bold mb-10 transition-colors duration-500">
-        My Projects
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-4">
-        {projectList.map((project: Project, index) => (
-          <div
-            key={index}
-            className={`relative rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 transform hover:scale-105 hover:shadow-xl ${dark ? 'bg-gray-800' : 'bg-white'
-              }`}
+    <Section id="projects" eyebrow="Projects" title="Things I've built">
+      <div className="grid gap-8 md:grid-cols-2">
+        {projectList.map((project) => (
+          <article
+            key={project.title}
+            className="card group flex flex-col overflow-hidden transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5 dark:hover:shadow-black/30"
           >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-bold">{project.title}</h3>
-              <p className="text-sm mb-4">{project.description}</p>
-              <div className="flex space-x-4">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`py-2 px-4 text-white font-semibold rounded-lg transition-all duration-300 ${dark
-                      ? 'bg-blue-600 hover:bg-blue-700'
-                      : 'bg-blue-500 hover:bg-blue-600'
-                      }`}
-                  >
-                    GitHub
-                  </a>
-                )}
+            <div className="aspect-video overflow-hidden border-b border-slate-200 bg-slate-100 dark:border-slate-800 dark:bg-slate-800">
+              <img
+                src={project.image}
+                alt={`${project.title} screenshot`}
+                loading="lazy"
+                className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-6">
+              <h3 className="text-xl font-semibold">{project.title}</h3>
+              <p className="mt-3 leading-relaxed">{project.description}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span key={tech} className="chip">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-auto flex gap-3 pt-6">
                 {project.live && (
                   <a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`py-2 px-4 text-white font-semibold rounded-lg transition-all duration-300 ${dark
-                      ? 'bg-green-600 hover:bg-green-700'
-                      : 'bg-green-500 hover:bg-green-600'
-                      }`}
+                    className="btn-primary px-4 py-2"
                   >
-                    Live
+                    <FiExternalLink /> Live demo
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary px-4 py-2"
+                  >
+                    <FaGithub /> Code
                   </a>
                 )}
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
-    </section>
+    </Section>
   )
 }
 

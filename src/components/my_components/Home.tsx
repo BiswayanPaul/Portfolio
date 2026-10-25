@@ -1,149 +1,84 @@
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa"; // Social Media Icons
-import {
-  SiHtml5,
-  SiCss3,
-  SiJavascript,
-  SiReact,
-  SiNextdotjs,
-  SiPython,
-} from "react-icons/si"; // Tech Icons
-import Avatar from "../../../public/avatar.png";
+import { FiArrowRight, FiDownload, FiMapPin } from "react-icons/fi";
+import { profile, socialLinks } from "@/Data/Profile";
 
-interface HomeProps {
-  dark: boolean; // Accept the dark prop
-}
-
-function Home({ dark }: HomeProps) {
+function Home() {
   return (
     <section
       id="home"
-      className={`min-h-screen flex flex-col md:flex-row items-center justify-between p-16 transition-colors duration-300 ${dark ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-800"
-        }`}
+      className="relative scroll-mt-16 overflow-hidden"
     >
-      {/* Left Section: Introduction */}
-      <div className="md:w-1/2 p-8 text-center md:text-left">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 transition-colors duration-500">
-          Hi, I'm Biswayan Paul
-        </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl mb-12 transition-colors duration-300">
-          A passionate software developer focused on building modern web
-          applications using cutting-edge technologies.
-        </p>
-        {/* Social Media Links */}
-        <div className="flex justify-center md:justify-start space-x-8 mb-16">
-          <a
-            href="https://github.com/BiswayanPaul"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-125 transition-transform"
-          >
-            <FaGithub
-              size={40}
-              className={`hover:text-blue-500 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
-                }`}
-            />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/biswayan-paul-8852411ba/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-125 transition-transform"
-          >
-            <FaLinkedin
-              size={40}
-              className={`hover:text-blue-700 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
-                }`}
-            />
-          </a>
-          <a
-            href="https://x.com/paul_biswayan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-125 transition-transform"
-          >
-            <FaTwitter
-              size={40}
-              className={`hover:text-blue-400 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
-                }`}
-            />
-          </a>
-          <a
-            href="mailto:biswayanpaulju@example.com" // Replace with your actual email
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:scale-125 transition-transform"
-          >
-            <FaEnvelope
-              size={40}
-              className={`hover:text-red-500 transition-colors duration-300 ${dark ? "text-gray-200" : "text-gray-800"
-                }`}
-            />
-          </a>
-        </div>
-        {/* Download CV Button */}
-        <a
-          href="https://drive.google.com/file/d/15W6TMRdZCSNCQ-Rxkh7kex1EMlDwcmma/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-blue-600 text-white py-3 px-6 md:py-4 md:px-8 lg:py-5 lg:px-10 rounded-lg hover:bg-blue-500 transition-colors duration-300 text-lg md:text-xl lg:text-2xl"
-        >
-          Download CV
-        </a>
-      </div>
+      {/* Soft background glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[880px] -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-400/25 via-sky-400/20 to-fuchsia-400/25 blur-3xl dark:from-indigo-600/20 dark:via-sky-600/10 dark:to-fuchsia-600/20"
+      />
 
-      {/* Right Section: Avatar and Technology Logos */}
-      <div className="md:w-1/2 flex flex-col items-center px-8 mt-12 md:mt-0">
-        {/* Avatar with contrasting background */}
-        <div className="relative rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-3 md:p-4 lg:p-6 hover:scale-105 transition-transform duration-300 shadow-2xl">
-          <img
-            src={Avatar}
-            alt="Avatar"
-            className="rounded-full h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80 object-cover bg-gray-200 dark:bg-gray-800 transition-colors duration-500"
-          />
+      <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1.4fr_1fr]">
+        {/* Introduction */}
+        <div className="text-center md:text-left">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-sm font-medium text-slate-700 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-300">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            {profile.role} @ {profile.company}
+          </span>
+
+          <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            Hi, I'm{" "}
+            <span className="bg-gradient-to-r from-indigo-600 to-fuchsia-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-fuchsia-400">
+              {profile.name}
+            </span>
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400 md:mx-0 md:text-xl">
+            Full-stack engineer working with React, Next.js, Node.js, FastAPI
+            and PostgreSQL. I ship production features at TCS Digital while
+            independently building and deploying full-stack products
+            end-to-end.
+          </p>
+
+          <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+            <FiMapPin /> {profile.location}
+          </p>
+
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row md:justify-start">
+            <a href="#projects" className="btn-primary">
+              View my work <FiArrowRight />
+            </a>
+            <a
+              href={profile.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              <FiDownload /> Download resume
+            </a>
+          </div>
+
+          <div className="mt-8 flex justify-center gap-2 md:justify-start">
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="icon-link"
+              >
+                <Icon size={22} />
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Technology Logos */}
-        <div className="flex flex-wrap justify-center mt-12 space-x-6 max-w-full">
-          <div className="flex items-center mb-4">
-            <SiHtml5
-              size={50}
-              className={`md:text-5xl lg:text-6xl text-orange-600 hover:text-orange-500 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-orange-400" : "text-orange-600"
-                }`}
-            />
-          </div>
-          <div className="flex items-center mb-4">
-            <SiCss3
-              size={50}
-              className={`md:text-5xl lg:text-6xl text-blue-600 hover:text-blue-500 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-blue-400" : "text-blue-600"
-                }`}
-            />
-          </div>
-          <div className="flex items-center mb-4">
-            <SiJavascript
-              size={50}
-              className={`md:text-5xl lg:text-6xl text-yellow-400 hover:text-yellow-300 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-yellow-300" : "text-yellow-400"
-                }`}
-            />
-          </div>
-          <div className="flex items-center mb-4">
-            <SiReact
-              size={50}
-              className={`md:text-5xl lg:text-6xl text-blue-400 hover:text-blue-300 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-blue-300" : "text-blue-400"
-                }`}
-            />
-          </div>
-          <div className="flex items-center mb-4">
-            <SiNextdotjs
-              size={50}
-              className={`md:text-5xl lg:text-6xl text-black hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-400 hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-gray-200" : "text-black"
-                }`}
-            />
-          </div>
-          <div className="flex items-center mb-4">
-            <SiPython
-              size={50}
-              className={`md:text-5xl lg:text-6xl hover:scale-110 transition-transform duration-300 hover:drop-shadow-md ${dark ? "text-yellow-500" : "text-blue-500"
-                }`}
+        {/* Avatar */}
+        <div className="order-first flex justify-center md:order-last">
+          <div className="rounded-full bg-gradient-to-tr from-indigo-500 via-sky-400 to-fuchsia-500 p-1.5 shadow-2xl shadow-indigo-500/20">
+            <img
+              src="/avatar.png"
+              alt={profile.name}
+              className="h-44 w-44 rounded-full bg-slate-100 object-cover sm:h-56 sm:w-56 lg:h-72 lg:w-72 dark:bg-slate-900"
             />
           </div>
         </div>
