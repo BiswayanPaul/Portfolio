@@ -12,7 +12,7 @@ export const profile = {
     role: 'Full Stack Developer',
     company: 'TCS Digital',
     location: 'Kolkata, India',
-    email: 'biswayanpaulju@gmail.com',
+    email: 'codebiswayan@gmail.com',
     resume: 'https://drive.google.com/file/d/12Vir-un5Mm6odZ96zTZHZ3eOrMzX3A6t/view?usp=sharing',
 }
 
