@@ -20,7 +20,7 @@ export const projectList: Project[] = [
         title: 'Real-Time Drawing App',
         description: 'Collaborative drawing on a shared canvas supporting 10+ concurrent users, with update latency reduced by 30ms through an optimized WebSocket event pipeline.',
         tech: ['Next.js', 'PostgreSQL', 'WebSocket', 'Auth.js v5'],
-        image: '/drawapp.jpeg',
+        image: '/drawapp.png',
         github: 'https://github.com/BiswayanPaul/drawapp-Frontend',
         live: 'https://drawapp-frontend.vercel.app/',
     },
